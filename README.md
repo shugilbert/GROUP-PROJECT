@@ -24,3 +24,5 @@ Usage
 ---
 
 `npm start`
+
+update
