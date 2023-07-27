@@ -37,7 +37,7 @@ jobs:
   scan_docker_image:
     needs: [ build ]
     permissions:
-      id-token: read
+     # id-token: read
       contents: read
       packages: read
     runs-on : ubuntu-latest
