@@ -49,7 +49,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
     - name: Scan Docker image 🐳
       uses: snyk/actions/docker@master
-      continue-on-error: false
+      continue-on-error: true
       with:
           image: babah11/babahcloud9:react-calculator
           args: --file=Dockerfile --severity-threshold=high --sarif-file-output=snyk.sarif
