@@ -53,7 +53,6 @@ jobs:
       with:
           image: babah11/babahcloud9:react-calculator
           args: --file=Dockerfile --severity-threshold=high --sarif-file-output=snyk.sarif
-      env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
     - name: Upload Snyk report as sarif 📦
