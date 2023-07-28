@@ -1,5 +1,5 @@
 # stage one 
-FROM node:17-alpine As builder
+FROM node:16-alpine3.17 As builder
 WORKDIR /calculator
 COPY package.json .
 COPY yarn.lock .
@@ -8,7 +8,7 @@ COPY . .
 RUN yarn build
 
 #stage 2
-FROM nginx:1.24-alpine
+FROM nginx:1.24
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 COPY --from=builder /calculator/build .
