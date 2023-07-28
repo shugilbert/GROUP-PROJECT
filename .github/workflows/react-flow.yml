@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test: 
+  test_code_with_synk: 
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -19,8 +19,8 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
           args: --severity-threshold=high
-  build:
-    needs: [ test ]
+  build_an_push_docker_image:
+    needs: [ test_code_with_synk ]
 
     runs-on: ubuntu-latest
 
@@ -47,8 +47,8 @@ jobs:
         push: true
         tags: babah11/babahcloud9:react-calculator
 
-  scan_docker_image:
-    needs: [ build ]
+  scan_docker_image_synk:
+    needs: [ build_an_push_docker_image ]
     permissions:
      # id-token: read
       contents: read
@@ -71,7 +71,7 @@ jobs:
     
     - name: Scan Docker image 🐳
       uses: snyk/actions/docker@master
-      continue-on-error: true
+      continue-on-error: false
       env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
@@ -80,6 +80,6 @@ jobs:
       
 
     - name: Upload Snyk report as sarif 📦
-      uses: github/codeql-action/upload-sarif@v1
+      uses: github/codeql-action/upload-sarif@v2
       with:
           sarif_file: snyk.sarif
