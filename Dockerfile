@@ -3,9 +3,9 @@ FROM node:18-alpine As builder
 WORKDIR /calculator
 COPY package.json .
 COPY yarn.lock .
-RUN npm install
+RUN yarn install
 COPY . .
-RUN npm start
+RUN yarn build
 
 #stage 2
 FROM nginx:1.24-alpine
