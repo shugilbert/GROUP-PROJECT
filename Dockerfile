@@ -1,14 +1,14 @@
 # stage one 
-FROM node:16-slim As builder
+FROM node:18-alpine As builder
 WORKDIR /calculator
 COPY package.json .
 COPY yarn.lock .
-RUN yarn install
+RUN npm install
 COPY . .
-RUN yarn build
+RUN npm start
 
 #stage 2
-FROM nginx:1.19.0
+FROM nginx:1.24-alpine
 WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 COPY --from=builder /calculator/build .
