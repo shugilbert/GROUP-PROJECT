@@ -76,10 +76,10 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
           image: babah11/babahcloud9:react-calculator
-          args: --file=Dockerfile --severity-threshold=high --sarif-file-output=snyk.sarif 
+          args: --file=Dockerfile --severity-threshold=high --sarif-file-output=snyk.json
       
 
     - name: Upload Snyk report as sarif 📦
       uses: github/codeql-action/upload-sarif@v1
       with:
-          sarif_file: snyk.sarif
+          sarif_file: snyk.json
