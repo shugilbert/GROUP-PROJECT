@@ -1,5 +1,5 @@
 # stage one 
-FROM node:18-alpine As builder
+FROM node:17-alpine As builder
 WORKDIR /calculator
 COPY package.json .
 COPY yarn.lock .
